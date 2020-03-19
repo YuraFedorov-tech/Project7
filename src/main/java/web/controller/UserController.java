@@ -17,13 +17,7 @@ import java.util.List;
 public class UserController {
 	@Autowired
 	UsersRepository usersRepository;
-//	@RequestMapping(value = "changeUser", method = RequestMethod.GET)
-//	public String printWelcome1(ModelMap modelMap) {
-//		List<User> users = usersRepository.findAll();
-//		System.out.println(users);
-//		modelMap.addAttribute("userInJDBC", users);
-//		return "hello";
-//	}
+
 	@RequestMapping(value = "hello", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 		List<String> messages = new ArrayList<>();

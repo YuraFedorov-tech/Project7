@@ -24,6 +24,7 @@
     <th>${userInJDBC.name}</th>
     <th>${userInJDBC.password}</th>
 </tr>
+</br>
 <a href="/logout">Выход</a>
 
 </br>

@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import web.forms.UserForm;
 import web.model.Role;
 import web.model.User;
 import web.repository.UsersRepository;
@@ -25,36 +25,39 @@ import java.util.List;
 @Controller
 public class ChangeUsersController {
     @Autowired
-    UsersRepository usersRepository;
+    private final UsersRepository usersRepository;
+
+    public ChangeUsersController(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
 
 
     @GetMapping(value = "user")
     public String getUser(ModelMap modelMap, Authentication authentication) {
-        if(authentication==null)
+        if (authentication == null) {
             return "redirect:/login";
-        UserDetailesImpl userDetailes= (UserDetailesImpl) authentication.getPrincipal();
-        User user=new User().setPassword(userDetailes.getPassword()).setName(userDetailes.getUsername()).setId(userDetailes.getUser().getId());
+        }
+        UserDetailesImpl userDetailes = (UserDetailesImpl) authentication.getPrincipal();
+        User user = new User(userDetailes.getPassword(), userDetailes.getUsername(), new Role("USER"), userDetailes.getUser().getId());
         System.out.println(user);
         modelMap.addAttribute("userInJDBC", user);
-        return "seeUser";//
+        return "seeUser";
     }
+
     @GetMapping(value = "changeUser")
     public String getChangeCar(ModelMap modelMap) {
         List<User> users = usersRepository.findAll();
-        System.out.println(users);
         modelMap.addAttribute("userInJDBC", users);
-        return "crud";//
+        return "crud";
     }
-
 
 
     @PostMapping(value = "deleteUser")
     public String deleteCar(HttpServletRequest req) {
         String[] items = req.getParameterValues("Delete");
-//assuming Order is your order class and orderList is your item list
         for (String str : items) {
             try {
-                Long id=Long.parseLong(str);
+                Long id = Long.parseLong(str);
                 usersRepository.delete(usersRepository.findUserById(id));
             } catch (Throwable e) {
                 e.printStackTrace();
@@ -64,23 +67,36 @@ public class ChangeUsersController {
     }
 
     @GetMapping(value = "updateUser")
-    public String getUpdateUser(HttpServletRequest req, ModelMap model) {
-        Long id = Long.parseLong(req.getParameter("id"));
+    public String getUpdateUser(@PathVariable("id") Long id, ModelMap model) {
         User user = usersRepository.findUserById(id);
         model.addAttribute("User", user);
         return "change";
     }
 
     @PostMapping(value = "updateUser")
-    public String postUpdateUser(HttpServletRequest req) {
-        //?id=<c:out value='${Car.id}' />
-        String name = req.getParameter("name");
-        String password = req.getParameter("password");
-        Long id = Long.parseLong(req.getParameter("id"));
-        User user = new User().setName(name).setPassword(password).setId(id).setRole(Role.USER);
-        System.out.println(user);
+    public String postUpdateUser(UserForm userForm) {
+        User user = new User(userForm.getPassword(), userForm.getName(), new Role("USER"), userForm.getId());
         usersRepository.save(user);
-        System.out.println(user);
         return "redirect:/changeUser";
+    }
+
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String loginPage(Authentication authentication) {
+        if (authentication != null) {
+            return "redirect:/user";
+        }
+        return "login";
+    }
+
+    @PostMapping(value = "addUser")
+    public String postAddCar(UserForm userForm) {
+        User user = new User(userForm.getName(), userForm.getPassword(), new Role("USER"));
+        usersRepository.save(user);
+        return "redirect:/login";
+    }
+
+    @GetMapping(value = "/addUser")
+    public String getAddCar() {
+        return "addUser";
     }
 }

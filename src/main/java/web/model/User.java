@@ -10,15 +10,61 @@ package web.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-
+import java.util.Set;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Accessors(chain = true)
-@Data
+
 @NoArgsConstructor
 @Entity
 @Table(name = "fix_user")
 public class User {
+
+    public User(String name, String password, Role role) {
+        this.name = name;
+        this.password = password;
+        roles.add(role);
+}
+
+    public User( String password, String name, Role role,Long id) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        roles.add(role);
+    }
+
+//    public User(String password, String username, Role user, Long id) {
+//    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +76,15 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "role")
-    private Role role;
 
+    @ManyToMany(mappedBy = "RoleUser",fetch = FetchType.EAGER)
+    private Set<Role> roles;
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }
