@@ -1,20 +1,15 @@
 package web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import web.forms.UserForm;
-import web.model.Role;
-import web.model.User;
-import web.repository.RoleRepository;
-import web.repository.UsersRepository;
-import web.security.securityDitel.UserDetailesImpl;
 
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.*;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import web.forms.UserForm;
+import web.model.*;
+import web.security.securityDitel.UserDetailesImpl;
+import web.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -30,27 +25,19 @@ import java.util.List;
 @Controller
 public class ChangeUsersController {
     @Autowired
-    private final UsersRepository usersRepository;
-//
-//    @Autowired
-//    private RoleRepository roleRepository;
-
-    public ChangeUsersController(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
-    }
+    UserService userService;
 
     @PostMapping(value = "addUser")
     public String postAddCar(UserForm userForm) {
         List<Role> roles = new ArrayList<>();
         roles.add(new Role("USER"));
-   //     roles.add(new Role("ADMIN"));
         User user = new User(userForm.getName(), userForm.getPassword(), roles);
-        usersRepository.save(user);
+        userService.add(user);
         return "redirect:/login";
     }
 
     @GetMapping(value = "/addUser")
-    public String getAddCar() {
+    public String getAddUser() {
         return "addUser";
     }
 
@@ -76,43 +63,43 @@ public class ChangeUsersController {
         return "seeUser";
     }
 
-    @GetMapping(value = "changeUser")
+    @GetMapping(value = "admin/changeUser")
     public String getChangeCar(ModelMap modelMap) {
-        List<User> users = usersRepository.findAll();
+        List<User> users = userService.findAll();
         modelMap.addAttribute("userInJDBC", users);
         return "crud";
     }
 
 
-    @PostMapping(value = "deleteUser")
+    @PostMapping(value = "admin/deleteUser")
     public String deleteCar(HttpServletRequest req) {
         String[] items = req.getParameterValues("Delete");
         for (String str : items) {
             try {
                 Long id = Long.parseLong(str);
-                usersRepository.delete(usersRepository.findUserById(id));
+                userService.delete(id);
             } catch (Throwable e) {
                 e.printStackTrace();
             }
         }
-        return "redirect:/changeUser";
+        return "redirect:/admin/changeUser";
     }
 
-    @GetMapping(value = "updateUser")
+    @GetMapping(value = "admin/updateUser")
     public String getUpdateUser(HttpServletRequest req, ModelMap model) {
         Long id = Long.parseLong(req.getParameter("id"));
-        User user = usersRepository.findUserById(id);
+        User user = userService.findById(id);
         model.addAttribute("User", user);
         return "change";
     }
 
-    @PostMapping(value = "updateUser")
+    @PostMapping(value = "admin/updateUser")
     public String postUpdateUser(UserForm userForm) {
         List<Role> roles = new ArrayList<>();
         roles.add(new Role("USER"));
         User user = new User(userForm.getPassword(), userForm.getName(), roles, userForm.getId());
-        usersRepository.save(user);
-        return "redirect:/changeUser";
+        userService.add(user);
+        return "redirect:/admin/changeUser";
     }
 
 

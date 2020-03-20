@@ -7,7 +7,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import web.model.User;
-import web.repository.UsersRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +14,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class UserController {
-	@Autowired
-	UsersRepository usersRepository;
+
 
 	@RequestMapping(value = "hello", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
@@ -27,7 +25,4 @@ public class UserController {
 		model.addAttribute("messages", messages);
 		return "hello";
 	}
-
-
-
 }
