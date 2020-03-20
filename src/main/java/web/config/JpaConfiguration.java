@@ -23,6 +23,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import web.model.Role;
 import web.model.User;
 
 import javax.persistence.EntityManagerFactory;
@@ -96,7 +97,7 @@ public class JpaConfiguration {
         props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 
         factoryBean.setHibernateProperties(props);
-        factoryBean.setAnnotatedClasses(User.class);
+        factoryBean.setAnnotatedClasses(User.class, Role.class);
 
         //  factoryBean.setAnnotatedClasses(Car.class);
         return factoryBean;

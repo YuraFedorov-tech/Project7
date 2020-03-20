@@ -12,12 +12,9 @@
     <database id="3" parent="1" name="db_example">
       <ObjectId>16393</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>7526</IntrospectionStateNumber>
+      <IntrospectionStateNumber>7582</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|21802|21804|1
-sequence|table|21904|21906|1
-sequence|table|21935|21937|1
-sequence|table|21943|21945|1
+      <Relations>sequence|table|22143|22145|1
 </Relations>
     </database>
     <database id="4" parent="1" name="postgres">
@@ -74,7 +71,7 @@ sequence|table|21943|21945|1
       <Comment>standard public schema</Comment>
       <StateNumber>276</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>7527</IntrospectionStateNumber>
+      <IntrospectionStateNumber>7583</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="17" parent="3" name="heap">
@@ -148,329 +145,123 @@ sequence|table|21943|21945|1
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <sequence id="26" parent="16" name="car_id_seq">
-      <ObjectId>21943</ObjectId>
-      <StateNumber>7268</StateNumber>
+    <sequence id="26" parent="16" name="fix_user_id_seq">
+      <ObjectId>22143</ObjectId>
+      <StateNumber>7577</StateNumber>
       <Owner>postgres</Owner>
       <SequenceIdentity>1</SequenceIdentity>
       <CacheSize>1</CacheSize>
-      <DataType>integer</DataType>
+      <DataType>bigint</DataType>
     </sequence>
-    <sequence id="27" parent="16" name="caronlyid_id_seq">
-      <ObjectId>21802</ObjectId>
-      <StateNumber>5678</StateNumber>
+    <table id="27" parent="16" name="fix_user">
+      <ObjectId>22145</ObjectId>
       <Owner>postgres</Owner>
-      <SequenceIdentity>1</SequenceIdentity>
-      <CacheSize>1</CacheSize>
-      <DataType>integer</DataType>
-    </sequence>
-    <sequence id="28" parent="16" name="fix_id_seq">
-      <ObjectId>21935</ObjectId>
-      <StateNumber>7262</StateNumber>
-      <Owner>postgres</Owner>
-      <SequenceIdentity>1</SequenceIdentity>
-      <CacheSize>1</CacheSize>
-      <DataType>integer</DataType>
-    </sequence>
-    <sequence id="29" parent="16" name="users_id_seq">
-      <ObjectId>21904</ObjectId>
-      <StateNumber>7190</StateNumber>
-      <Owner>postgres</Owner>
-      <SequenceIdentity>1</SequenceIdentity>
-      <CacheSize>1</CacheSize>
-      <DataType>integer</DataType>
-    </sequence>
-    <table id="30" parent="16" name="car">
-      <ObjectId>21945</ObjectId>
-      <Owner>postgres</Owner>
-      <StateNumber>7268</StateNumber>
+      <StateNumber>7581</StateNumber>
     </table>
-    <table id="31" parent="16" name="caronlyid">
-      <ObjectId>21804</ObjectId>
+    <table id="28" parent="16" name="fix_user_roles">
+      <ObjectId>22154</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>5678</StateNumber>
+      <StateNumber>7580</StateNumber>
     </table>
-    <table id="32" parent="16" name="fix">
-      <ObjectId>21937</ObjectId>
+    <table id="29" parent="16" name="roles">
+      <ObjectId>22157</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>7262</StateNumber>
+      <StateNumber>7580</StateNumber>
     </table>
-    <table id="33" parent="16" name="persistent_logins">
-      <ObjectId>22015</ObjectId>
-      <Owner>postgres</Owner>
-      <StateNumber>7386</StateNumber>
-    </table>
-    <table id="34" parent="16" name="users">
-      <ObjectId>21906</ObjectId>
-      <Owner>postgres</Owner>
-      <StateNumber>7223</StateNumber>
-    </table>
-    <table id="35" parent="16" name="users_roles">
-      <ObjectId>22070</ObjectId>
-      <Owner>postgres</Owner>
-      <StateNumber>7516</StateNumber>
-    </table>
-    <column id="36" parent="30" name="id">
+    <column id="30" parent="27" name="id">
       <Position>1</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>7268</StateNumber>
-      <DefaultExpression>nextval(&apos;car_id_seq&apos;::regclass)</DefaultExpression>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="37" parent="30" name="name">
-      <Position>2</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <StateNumber>7268</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="38" parent="30" name="series">
-      <Position>3</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>7268</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="39" parent="30" name="owner_id">
-      <Position>4</Position>
       <DataType>bigint|0s</DataType>
-      <StateNumber>7268</StateNumber>
+      <NotNull>1</NotNull>
+      <StateNumber>7577</StateNumber>
+      <DefaultExpression>nextval(&apos;fix_user_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>20</TypeId>
     </column>
-    <index id="40" parent="30" name="car_pkey">
-      <ObjectId>21949</ObjectId>
-      <StateNumber>7268</StateNumber>
+    <column id="31" parent="27" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <StateNumber>7577</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="32" parent="27" name="password">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <StateNumber>7577</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="33" parent="27" name="fix_user_pkey">
+      <ObjectId>22152</ObjectId>
+      <StateNumber>7577</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="41" parent="30" name="car_pkey">
-      <ObjectId>21950</ObjectId>
-      <StateNumber>7268</StateNumber>
+    <key id="34" parent="27" name="fix_user_pkey">
+      <ObjectId>22153</ObjectId>
+      <StateNumber>7577</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>car_pkey</UnderlyingIndexName>
+      <UnderlyingIndexName>fix_user_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="42" parent="30" name="car_owner_id_fkey">
-      <ObjectId>21951</ObjectId>
-      <StateNumber>7268</StateNumber>
-      <ColNames>owner_id</ColNames>
-      <RefTableId>21906</RefTableId>
+    <column id="35" parent="28" name="user_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>7578</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="36" parent="28" name="roles_id_">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>7578</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <foreign-key id="37" parent="28" name="fk22enbvu1vnqbak5y5x2ta25ig">
+      <ObjectId>22167</ObjectId>
+      <StateNumber>7581</StateNumber>
+      <ColNames>user_id</ColNames>
+      <RefTableId>22145</RefTableId>
       <RefColPositions>1</RefColPositions>
-      <RefTableName>users</RefTableName>
-      <RefKeyName>users_pkey</RefKeyName>
+      <RefTableName>fix_user</RefTableName>
+      <RefKeyName>fix_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="43" parent="30" name="fk1eid8fr9tsauseqkuh4c44qhr">
-      <ObjectId>21956</ObjectId>
-      <StateNumber>7272</StateNumber>
-      <ColNames>owner_id</ColNames>
-      <RefTableId>21906</RefTableId>
+    <foreign-key id="38" parent="28" name="fkggjft1jgksam4ils7ug5a549v">
+      <ObjectId>22162</ObjectId>
+      <StateNumber>7580</StateNumber>
+      <ColNames>roles_id_</ColNames>
+      <RefTableId>22157</RefTableId>
       <RefColPositions>1</RefColPositions>
-      <RefTableName>users</RefTableName>
-      <RefKeyName>users_pkey</RefKeyName>
-      <RefColNames>id</RefColNames>
+      <RefTableName>roles</RefTableName>
+      <RefKeyName>roles_pkey</RefKeyName>
+      <RefColNames>id_</RefColNames>
     </foreign-key>
-    <column id="44" parent="31" name="id">
-      <Position>1</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>5678</StateNumber>
-      <DefaultExpression>nextval(&apos;caronlyid_id_seq&apos;::regclass)</DefaultExpression>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="45" parent="31" name="name">
-      <Position>2</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <StateNumber>5678</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="46" parent="31" name="series">
-      <Position>3</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>5678</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="47" parent="31" name="owner_id">
-      <Position>4</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>5678</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <index id="48" parent="31" name="caronlyid_pkey">
-      <ObjectId>21808</ObjectId>
-      <StateNumber>5678</StateNumber>
-      <ColNames>id</ColNames>
-      <Unique>1</Unique>
-      <Primary>1</Primary>
-    </index>
-    <key id="49" parent="31" name="caronlyid_pkey">
-      <ObjectId>21809</ObjectId>
-      <StateNumber>5678</StateNumber>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>caronlyid_pkey</UnderlyingIndexName>
-    </key>
-    <column id="50" parent="32" name="id">
-      <Position>1</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>7262</StateNumber>
-      <DefaultExpression>nextval(&apos;fix_id_seq&apos;::regclass)</DefaultExpression>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="51" parent="32" name="name">
-      <Position>2</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <StateNumber>7262</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="52" parent="32" name="series">
-      <Position>3</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>7262</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <index id="53" parent="32" name="fix_pkey">
-      <ObjectId>21941</ObjectId>
-      <StateNumber>7262</StateNumber>
-      <ColNames>id</ColNames>
-      <Unique>1</Unique>
-      <Primary>1</Primary>
-    </index>
-    <key id="54" parent="32" name="fix_pkey">
-      <ObjectId>21942</ObjectId>
-      <StateNumber>7262</StateNumber>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>fix_pkey</UnderlyingIndexName>
-    </key>
-    <column id="55" parent="33" name="username">
-      <Position>1</Position>
-      <DataType>varchar(64)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>7386</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="56" parent="33" name="series">
-      <Position>2</Position>
-      <DataType>varchar(64)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>7386</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="57" parent="33" name="token">
-      <Position>3</Position>
-      <DataType>varchar(64)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>7386</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="58" parent="33" name="last_used">
-      <Position>4</Position>
-      <DataType>timestamp|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>7386</StateNumber>
-      <TypeId>1114</TypeId>
-    </column>
-    <index id="59" parent="33" name="persistent_logins_pkey">
-      <ObjectId>22018</ObjectId>
-      <StateNumber>7386</StateNumber>
-      <ColNames>series</ColNames>
-      <Unique>1</Unique>
-      <Primary>1</Primary>
-    </index>
-    <key id="60" parent="33" name="persistent_logins_pkey">
-      <ObjectId>22019</ObjectId>
-      <StateNumber>7386</StateNumber>
-      <ColNames>series</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>persistent_logins_pkey</UnderlyingIndexName>
-    </key>
-    <column id="61" parent="34" name="id">
-      <Position>1</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>7190</StateNumber>
-      <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="62" parent="34" name="first_name">
-      <Position>2</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <StateNumber>7190</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="63" parent="34" name="last_name">
-      <Position>3</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <StateNumber>7190</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="64" parent="34" name="email">
-      <Position>4</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <StateNumber>7190</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="65" parent="34" name="owner_id">
-      <Position>5</Position>
-      <DataType>bigint|0s</DataType>
-      <StateNumber>7223</StateNumber>
-      <TypeId>20</TypeId>
-    </column>
-    <index id="66" parent="34" name="users_pkey">
-      <ObjectId>21910</ObjectId>
-      <StateNumber>7190</StateNumber>
-      <ColNames>id</ColNames>
-      <Unique>1</Unique>
-      <Primary>1</Primary>
-    </index>
-    <key id="67" parent="34" name="users_pkey">
-      <ObjectId>21911</ObjectId>
-      <StateNumber>7190</StateNumber>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
-    </key>
-    <foreign-key id="68" parent="34" name="fk82le6nnbkewwf7pd4x1icca08">
-      <ObjectId>21961</ObjectId>
-      <StateNumber>7273</StateNumber>
-      <ColNames>owner_id</ColNames>
-      <RefTableId>21945</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>car</RefTableName>
-      <RefKeyName>car_pkey</RefKeyName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="69" parent="35" name="user_id">
+    <column id="39" parent="29" name="id_">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>7514</StateNumber>
+      <StateNumber>7579</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="70" parent="35" name="role_id">
+    <column id="40" parent="29" name="role">
       <Position>2</Position>
-      <DataType>bigint|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>7514</StateNumber>
-      <TypeId>20</TypeId>
+      <DataType>varchar(255)|0s</DataType>
+      <StateNumber>7579</StateNumber>
+      <TypeId>1043</TypeId>
     </column>
-    <index id="71" parent="35" name="users_roles_pkey">
-      <ObjectId>22073</ObjectId>
-      <StateNumber>7514</StateNumber>
-      <ColNames>user_id
-role_id</ColNames>
+    <index id="41" parent="29" name="roles_pkey">
+      <ObjectId>22160</ObjectId>
+      <StateNumber>7579</StateNumber>
+      <ColNames>id_</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="72" parent="35" name="users_roles_pkey">
-      <ObjectId>22074</ObjectId>
-      <StateNumber>7514</StateNumber>
-      <ColNames>user_id
-role_id</ColNames>
+    <key id="42" parent="29" name="roles_pkey">
+      <ObjectId>22161</ObjectId>
+      <StateNumber>7579</StateNumber>
+      <ColNames>id_</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>users_roles_pkey</UnderlyingIndexName>
+      <UnderlyingIndexName>roles_pkey</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>

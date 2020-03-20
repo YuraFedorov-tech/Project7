@@ -10,6 +10,8 @@ package web.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.springframework.security.core.GrantedAuthority;
+
 import java.util.Set;
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Accessors(chain = true)
-
+@Data
 @NoArgsConstructor
 @Entity
 @Table(name = "fix_user")
@@ -27,17 +29,32 @@ public class User {
         this.name = name;
         this.password = password;
         roles.add(role);
-}
+    }
 
-    public User( String password, String name, Role role,Long id) {
+    public User(String password, String name, Role role, Long id) {
         this.id = id;
         this.name = name;
         this.password = password;
         roles.add(role);
     }
+    public User(String password, String name, Long id) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+    }
+    public User(String name, String password, List<Role> roles) {
+        this.name = name;
+        this.password = password;
+        this.roles = roles;
+    }
+    public User(String name, String password, List<Role> roles,Long id) {
+        this.name = name;
+        this.password = password;
+        this.roles = roles;
+        this.id = id;
+    }
 
-//    public User(String password, String username, Role user, Long id) {
-//    }
+
 
     public Long getId() {
         return id;
@@ -64,7 +81,6 @@ public class User {
     }
 
 
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,15 +92,25 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Role> roles;
 
-    @ManyToMany(mappedBy = "RoleUser",fetch = FetchType.EAGER)
-    private Set<Role> roles;
-
-    public Set<Role> getRoles() {
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setAuthorities(List<Role> roles) {
         this.roles = roles;
     }
+
+//    @ManyToMany(mappedBy = "RoleUser",fetch = FetchType.EAGER)
+//    private List<Role> roles;
+//
+//    public List<Role> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(List<Role> roles) {
+//        this.roles = roles;
+//    }
 }

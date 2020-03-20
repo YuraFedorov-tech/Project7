@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import web.model.Role;
 import web.model.User;
 
 import java.util.Collection;
@@ -29,9 +30,10 @@ public class UserDetailesImpl implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
        // String userRole = user.getRole().name();
-        String userRole=user.getRoles().toString();
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole);
-        return Collections.singletonList(authority);
+   //     String userRole=user.getRoles().toString();
+   //     Collection<? extends GrantedAuthority> userRoles=user.getAuthorities();
+     //   SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole);
+        return user.getAuthorities();
     }
 
     @Override
