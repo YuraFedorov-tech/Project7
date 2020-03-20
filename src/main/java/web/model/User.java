@@ -103,14 +103,4 @@ public class User {
         this.roles = roles;
     }
 
-//    @ManyToMany(mappedBy = "RoleUser",fetch = FetchType.EAGER)
-//    private List<Role> roles;
-//
-//    public List<Role> getRoles() {
-//        return roles;
-//    }
-//
-//    public void setRoles(List<Role> roles) {
-//        this.roles = roles;
-//    }
 }
